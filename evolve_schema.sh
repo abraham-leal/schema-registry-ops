@@ -4,7 +4,7 @@ SR_URL=$SR_URL
 USER=$KEY
 PASS=$SECRET
 
-schemasListFromGit=$(git show --name-only HEAD HEAD~1 | grep ".json$")
+schemasListFromGit=$(git diff --name-only HEAD HEAD~1 | grep ".json$")
 
 for singleSchema in $schemasListFromGit
 do 
