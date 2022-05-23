@@ -33,11 +33,6 @@
       "connect.index": 0,
       "connect.type": "int64",
       "type": "integer"
-    },
-    "orderunits": {
-      "connect.index": 3,
-      "connect.type": "float64",
-      "type": "number"
     }
   },
   "title": "ksql.orders",
