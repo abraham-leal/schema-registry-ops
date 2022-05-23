@@ -8,6 +8,9 @@ CURRENT_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
 git fetch --depth=1 https://github.com/abraham-leal/schema-registry-ops.git refs/heads/$CURRENT_BRANCH:refs/remotes/origin/$CURRENT_BRANCH
 git fetch --depth=1 https://github.com/abraham-leal/schema-registry-ops.git refs/heads/main:refs/remotes/origin/main
 
+echo "Git merge-base result:"
+git merge-base ${CURRENT_BRANCH} main
+
 schemasListFromGit=$(git --no-pager diff --name-only ${CURRENT_BRANCH} $(git merge-base ${CURRENT_BRANCH} main) | grep ".json$")
 
 for singleSchema in $schemasListFromGit
