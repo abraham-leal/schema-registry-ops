@@ -5,14 +5,7 @@ USER=$KEY
 PASS=$SECRET
 CURRENT_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
 
-git fetch --all
-
-git branch --show-current
-
-debug=$(git merge-base ${CURRENT_BRANCH} main)
-echo $debug
-
-echo "git --no-pager diff --name-only ${CURRENT_BRANCH} $(git merge-base ${CURRENT_BRANCH} main) | grep '.json$'"
+fetch_branches()
 
 schemasListFromGit=$(git --no-pager diff --name-only ${CURRENT_BRANCH} $(git merge-base ${CURRENT_BRANCH} main) | grep ".json$")
 
@@ -32,3 +25,19 @@ do
 done 
 
 exit 0
+
+
+function fetch_branches()
+{
+    local build_head=$(git rev-parse HEAD)
+
+    git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
+    git fetch
+
+    for branch in $(git branch -r|grep -v HEAD) ; do
+        git checkout -qf ${branch#origin/}
+    done
+
+    git checkout ${build_head}
+}
+
