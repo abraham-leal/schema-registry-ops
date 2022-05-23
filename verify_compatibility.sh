@@ -3,20 +3,8 @@
 SR_URL=$SR_URL
 USER=$KEY
 PASS=$SECRET
-CURRENT_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
 
-build_head=$(git rev-parse HEAD)
-git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-git fetch --depth=1 https://github.com/abraham-leal/schema-registry-ops.git refs/heads/$CURRENT_BRANCH:refs/remotes/origin/$CURRENT_BRANCH
-for branch in $(git branch -r|grep -v HEAD) ; do
-        git checkout -qf ${branch#origin/}
-done
-git checkout ${build_head}
-
-echo "Git merge-base result:"
-git merge-base ${CURRENT_BRANCH} main
-
-schemasListFromGit=$(git --no-pager diff --name-only ${CURRENT_BRANCH} $(git merge-base ${CURRENT_BRANCH} main) | grep ".json$")
+schemasListFromGit=$(git --no-pager diff --name-only HEAD $(git merge-base HEAD main) | grep ".json$")
 
 for singleSchema in $schemasListFromGit
 do 
