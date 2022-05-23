@@ -1,20 +1,19 @@
 {
-    "connect.name": "ksql.pageviews",
-    "fields": [
-      {
-        "name": "viewtime",
-        "type": "long"
-      },
-      {
-        "name": "userid",
+    "properties": {
+      "pageid": {
+        "connect.index": 2,
         "type": "string"
       },
-      {
-        "name": "pageid",
+      "userid": {
+        "connect.index": 1,
         "type": "string"
+      },
+      "viewtime": {
+        "connect.index": 0,
+        "connect.type": "int64",
+        "type": "integer"
       }
-    ],
-    "name": "pageviews",
-    "namespace": "ksql",
-    "type": "record"
+    },
+    "title": "ksql.pageviews",
+    "type": "object"
   }
