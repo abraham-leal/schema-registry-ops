@@ -5,7 +5,7 @@ USER=$KEY
 PASS=$SECRET
 CURRENT_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
 
-local build_head=$(git rev-parse HEAD)
+build_head=$(git rev-parse HEAD)
 git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
 git fetch --depth=1 https://github.com/abraham-leal/schema-registry-ops.git refs/heads/$CURRENT_BRANCH:refs/remotes/origin/$CURRENT_BRANCH
 for branch in $(git branch -r|grep -v HEAD) ; do
