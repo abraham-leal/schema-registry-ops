@@ -28,11 +28,6 @@
       "connect.index": 1,
       "connect.type": "int32",
       "type": "integer"
-    },
-    "ordertime": {
-      "connect.index": 0,
-      "connect.type": "int64",
-      "type": "integer"
     }
   },
   "title": "ksql.orders",
