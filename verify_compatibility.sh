@@ -5,21 +5,8 @@ USER=$KEY
 PASS=$SECRET
 CURRENT_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
 
-function fetch_branches()
-{
-    local build_head=$(git rev-parse HEAD)
-
-    git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
-    git fetch
-
-    for branch in $(git branch -r|grep -v HEAD) ; do
-        git checkout -qf ${branch#origin/}
-    done
-
-    git checkout ${build_head}
-}
-
-fetch_branches()
+git fetch --depth=1 https://github.com/abraham-leal/schema-registry-ops.git refs/heads/$CURRENT_BRANCH:refs/remotes/origin/$CURRENT_BRANCH
+git fetch --depth=1 https://github.com/abraham-leal/schema-registry-ops.git refs/heads/main:refs/remotes/origin/main
 
 schemasListFromGit=$(git --no-pager diff --name-only ${CURRENT_BRANCH} $(git merge-base ${CURRENT_BRANCH} main) | grep ".json$")
 
