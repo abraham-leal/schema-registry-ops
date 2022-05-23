@@ -9,6 +9,9 @@ git fetch --all
 
 git branch --show-current
 
+debug=$(git merge-base ${CURRENT_BRANCH} main)
+echo $debug
+
 echo "git --no-pager diff --name-only ${CURRENT_BRANCH} $(git merge-base ${CURRENT_BRANCH} main) | grep '.json$'"
 
 schemasListFromGit=$(git --no-pager diff --name-only ${CURRENT_BRANCH} $(git merge-base ${CURRENT_BRANCH} main) | grep ".json$")
