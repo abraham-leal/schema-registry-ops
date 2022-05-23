@@ -3,18 +3,8 @@
 SR_URL=$SR_URL
 USER=$KEY
 PASS=$SECRET
-CURRENT_BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
 
-git fetch --all
-
-git branch --show-current
-
-debug=$(git merge-base ${CURRENT_BRANCH} main)
-echo $debug
-
-echo "git --no-pager diff --name-only ${CURRENT_BRANCH} $(git merge-base ${CURRENT_BRANCH} main) | grep '.json$'"
-
-schemasListFromGit=$(git --no-pager diff --name-only ${CURRENT_BRANCH} $(git merge-base ${CURRENT_BRANCH} main) | grep ".json$")
+schemasListFromGit=$(git --no-pager diff --name-only HEAD $(git merge-base HEAD main) | grep ".json$")
 
 for singleSchema in $schemasListFromGit
 do 
@@ -32,3 +22,4 @@ do
 done 
 
 exit 0
+
