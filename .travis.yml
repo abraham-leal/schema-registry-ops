@@ -1,0 +1,5 @@
+language: minimal
+
+script:
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "main" ]; then ./evolve_schema.sh ; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then ./verify_compatibility.sh ; fi'

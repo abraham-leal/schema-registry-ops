@@ -1,0 +1,19 @@
+{
+    "properties": {
+      "pageid": {
+        "connect.index": 2,
+        "type": "string"
+      },
+      "userid": {
+        "connect.index": 1,
+        "type": "string"
+      },
+      "viewtime": {
+        "connect.index": 0,
+        "connect.type": "int64",
+        "type": "integer"
+      }
+    },
+    "title": "ksql.pageviews",
+    "type": "object"
+  }
